@@ -28,9 +28,9 @@
 8. Docker Images
     - In Docker, everything is based on Images. An image is a combination of a file system and parameters.
     - docker run hello-world 
-        -- Docker command is specific and tells the Docker program on the Operating System that something needs to be done
-        -- run command is used to mention that we want to create an instance of an image, which is then called a container
-        -- "hello-world" represents the image from which the container is made.
+        a. Docker command is specific and tells the Docker program on the Operating System that something needs to be done
+        b. run command is used to mention that we want to create an instance of an image, which is then called a container
+        c. "hello-world" represents the image from which the container is made.
 
 9. docker run -it centos /bin/bash
 -> centos is the name of the image we want to download from Docker Hub
