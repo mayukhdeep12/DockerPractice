@@ -1,7 +1,7 @@
 # DockerPractice
 
 1. What is Docker?
--> Docker is a container management service. The keywords of Docker are develop, ship and run anywhere. The whole idea of Docker is for developers to easily develop applications, ship them into containers which can then be deployed anywhere.
+    - Docker is a container management service. The keywords of Docker are develop, ship and run anywhere. The whole idea of Docker is for developers to easily develop applications, ship them into containers which can then be deployed anywhere.
 
 2. Features
     - Docker has the ability to reduce the size of development by providing a smaller footprint of the operating system via containers.
@@ -20,17 +20,17 @@
     - This command will pull all the jenkins required files from dockerhub.
 
 7. docker run -p 8080:8080 -p 50000:50000 jenkins/jenkins
--> jenkins/jenkins is the name of the image we want to download from Docker hub
--> -p is used to map the port number
--> Open http://localhost:8080/ or http://localhost:50000/ in your browser that will redirect you to unlock jenkins screen.
--> you can use password that has been generated in the terminal and paste it in the browser to proceed the installation.
+    - jenkins/jenkins is the name of the image we want to download from Docker hub
+    - -p is used to map the port number
+    - Open http://localhost:8080/ or http://localhost:50000/ in your browser that will redirect you to unlock jenkins screen.
+    - you can use password that has been generated in the terminal and paste it in the browser to proceed the installation.
 
 8. Docker Images
--> In Docker, everything is based on Images. An image is a combination of a file system and parameters.
--> docker run hello-world 
-    - Docker command is specific and tells the Docker program on the Operating System that something needs to be done
-    - run command is used to mention that we want to create an instance of an image, which is then called a container
-    - "hello-world" represents the image from which the container is made.
+    - In Docker, everything is based on Images. An image is a combination of a file system and parameters.
+    - docker run hello-world 
+        -- Docker command is specific and tells the Docker program on the Operating System that something needs to be done
+        -- run command is used to mention that we want to create an instance of an image, which is then called a container
+        -- "hello-world" represents the image from which the container is made.
 
 9. docker run -it centos /bin/bash
 -> centos is the name of the image we want to download from Docker Hub
@@ -109,3 +109,84 @@
 31. Pull the docker image
 -> Now First delete the myimage image from the docker
 -> than "docker pull username/demorep:1.0"
+
+32. Private Registry
+-> Registry is the container managed by Docker which can be used to host private repositories.
+
+33. docker run –d –p 5000:5000 –-name registry registry:2
+-> We are just tagging the registry container as “2”, to differentiate it on the Docker host.
+-> The –d option is used to run the container in detached mode. This is so that the container can run in the background
+
+34. Let’s do a docker ps to see that the registry container is indeed running.
+
+35. docker tag 5d0da3dc9764 localhost:5000/centos 
+-> let’s tag one of our existing images so that we can push it to our local repository. In our example, since we have the centos image available locally, we are going to tag it to our private repository and add a tag name of centos.
+
+36. docker push localhost:5000/centos 
+-> let’s use the Docker push command to push the repository to our private repository.
+
+37. docker rmi centos:latest , docker rmi 67591570dd29
+-> let’s delete the local images we have for centos using the docker rmi commands.
+
+38. docker pull localhost:5000/centos
+-> we are pulling the centos image to the private repository hosted at localhost:5000.
+
+39. Building a Web Server Docker File
+-> Check the Dockerfile for more details
+
+40. docker build –t=”mywebserver” .
+-> Run the Docker build command to build the Docker file
+
+41. docker run –d –p 80:80 mywebserver 
+-> it’s now time to create a container from the image. We can do this with the Docker run command
+-> Check the apache running at http://localhost:80
+
+42. CMD Instruction - CMD command param1 
+->This command is used to execute a command at runtime when the container is executed. 
+
+43. FROM ubuntu 
+MAINTAINER username@gmail.com 
+CMD [“echo” , “hello world”] 
+-> CMD is just used to print hello world.
+-> Build the image using the Docker build command.
+-> Run a container from the image.
+
+44. ENTRYPOINT - ENTRYPOINT command param1 
+-> This command can also be used to execute commands at runtime for the container.
+-> command − This is the command to run when the container is launched.
+-> param1 − This is the parameter entered into the command.
+
+45. FROM ubuntu 
+MAINTAINER demousr@gmail.com 
+ENTRYPOINT [“echo”]
+-> Build the image using the Docker build command.
+-> Run a container from the image.
+
+46. ENV - ENV key value 
+-> This command is used to set environment variables in the container.
+-> Key − This is the key for the environment variable.
+-> value − This is the value for the environment variable.
+
+47. FROM ubuntu 
+MAINTAINER demousr@gmail.com 
+ENV var1=Tutorial var2=point 
+-> Build the image using the Docker build command - docker build -t="envdemo" .
+-> Run a container from the image - docker run -it envdemo /bin/bash
+-> execute the env command to see the environment variables - root@4t34t:/# env
+
+48. WORKDIR - WORKDIR dirname 
+-> This command is used to set the working directory of the container.
+
+49. FROM ubuntu 
+MAINTAINER demousr@gmail.com 
+WORKDIR /newtemp 
+CMD pwd
+-> Build the image using the Docker build command - docker build -t="tempdemo" .
+-> Run a container from the image - docker run tempdemo
+
+50. Container Linking
+-> docker jenkins pull
+-> run the container, but this time, you can specify a name to the container by using the –-name option. This will be our source container - docker run --name=jenkins -d jenkins
+-> launch the destination container, but this time, we will link it with our source container. For our destination container, we will use the standard Ubuntu image - docker run --name=reca --link=jenkins:alias-src -it ubuntu:latest /bin/bash
+-> docker ps
+-> type env in the root you will notice new variables for linking with the source container.
