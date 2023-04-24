@@ -144,9 +144,12 @@
 42. CMD Instruction - CMD command param1 
     - This command is used to execute a command at runtime when the container is executed. 
 
-43. ```FROM ubuntu 
+43. 
+```
+FROM ubuntu 
 MAINTAINER username@gmail.com 
-CMD [“echo” , “hello world”] ```
+CMD [“echo” , “hello world”] 
+`````
     - CMD is just used to print hello world.
     - Build the image using the Docker build command.
     - Run a container from the image.
@@ -156,9 +159,12 @@ CMD [“echo” , “hello world”] ```
     - command − This is the command to run when the container is launched.
     - param1 − This is the parameter entered into the command.
 
-45. ```FROM ubuntu 
+45. 
+```
+FROM ubuntu 
 MAINTAINER demousr@gmail.com 
-ENTRYPOINT [“echo”]```
+ENTRYPOINT [“echo”]
+```
     - Build the image using the Docker build command.
     - Run a container from the image.
 
