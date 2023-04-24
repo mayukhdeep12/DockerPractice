@@ -149,11 +149,11 @@
 FROM ubuntu 
 MAINTAINER username@gmail.com 
 CMD [“echo” , “hello world”] 
-`````
-    - CMD is just used to print hello world.
-    - Build the image using the Docker build command.
-    - Run a container from the image.
 
+    -> CMD is just used to print hello world.
+    -> Build the image using the Docker build command.
+    -> Run a container from the image.
+```
 44. ENTRYPOINT - ENTRYPOINT command param1 
     - This command can also be used to execute commands at runtime for the container.
     - command − This is the command to run when the container is launched.
@@ -164,31 +164,37 @@ CMD [“echo” , “hello world”]
 FROM ubuntu 
 MAINTAINER demousr@gmail.com 
 ENTRYPOINT [“echo”]
-```
-    - Build the image using the Docker build command.
-    - Run a container from the image.
 
+    -> Build the image using the Docker build command.
+    -> Run a container from the image.
+```
 46. ENV - ENV key value 
     - This command is used to set environment variables in the container.
     - Key − This is the key for the environment variable.
     - value − This is the value for the environment variable.
 
-47. ```FROM ubuntu 
+47. 
+```
+FROM ubuntu 
 MAINTAINER demousr@gmail.com 
-ENV var1=Tutorial var2=point ```
+ENV var1=Tutorial var2=point 
     - Build the image using the Docker build command - `docker build -t="envdemo" .`
     - Run a container from the image - `docker run -it envdemo /bin/bash`
     - execute the env command to see the environment variables - root@4t34t:/# `env`
+```
 
 48. WORKDIR - WORKDIR dirname 
     - This command is used to set the working directory of the container.
 
-49. ```FROM ubuntu 
+49. 
+```
+FROM ubuntu 
 MAINTAINER demousr@gmail.com 
 WORKDIR /newtemp 
-CMD pwd```
+CMD pwd
     - Build the image using the Docker build command - `docker build -t="tempdemo" .`
     - Run a container from the image - `docker run tempdemo`
+```
 
 50. Container Linking
     - `docker jenkins pull`
